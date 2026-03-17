@@ -45,14 +45,11 @@ const transformations = {
   // Convierte la primera letra de la frase a minúscula
   'decapitalize': (text) => text.charAt(0).toLowerCase() + text.slice(1),
 
+  // Combinación: eliminar punto final + decapitalizar
   'final': (text) => {
-    // Primero elimina puntuaciones
-    const withoutPunctuation = text
-      .replace(/[.,;]/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
-    // Luego convierte a minúsculas
-    return withoutPunctuation.toLowerCase();
+    return text
+      .replace(/\.\s*$/, '')
+      .replace(/^./, c => c.toLowerCase());
   }
 };
 
