@@ -48,6 +48,8 @@ const transformations = {
   // Combo: remove trailing period + decapitalize
   'final': (text) => {
     const t = text.replace(/\.\s*$/, '');
+    // TODO: lowercase after mid-sentence periods: "Algo. Luego" → "algo luego"
+    // const t = text.replace(/\.\s*/g, ' ').trim();
     return t[0].toLowerCase() + t[1].toLowerCase() + t.slice(2);
   }
 };
