@@ -5,8 +5,13 @@ Servidor local compatible con OpenAI API para transformaciones de texto en Whisp
 ## Inicio rápido
 
 ```bash
-npm install
-npm start
+# Con node
+npm install && npm start
+
+# Con bun
+bun install && bun server.js
+# o con script
+bun run bs
 ```
 
 El servidor se ejecutará en `http://localhost:3000`
@@ -14,7 +19,7 @@ El servidor se ejecutará en `http://localhost:3000`
 ## Transformaciones disponibles
 
 | Transformación | Descripción | Ejemplo |
-|---|---|---|
+| --- | --- | --- |
 | `lowercase` | Convierte a minúsculas | `"HOLA MUNDO"` → `"hola mundo"` |
 | `uppercase` | Convierte a mayúsculas | `"hola mundo"` → `"HOLA MUNDO"` |
 | `capitalize` | Primera letra mayúscula, resto minúsculas | `"HOLA MUNDO"` → `"Hola mundo"` |
