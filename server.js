@@ -39,7 +39,12 @@ const transformations = {
       .trim();
   },
 
-  // Combinación: lowercase + eliminar puntuaciones
+  // Elimina el punto final de la frase
+  'remove-trailing-period': (text) => text.replace(/\.\s*$/, ''),
+
+  // Convierte la primera letra de la frase a minúscula
+  'decapitalize': (text) => text.charAt(0).toLowerCase() + text.slice(1),
+
   'final': (text) => {
     // Primero elimina puntuaciones
     const withoutPunctuation = text
