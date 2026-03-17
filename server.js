@@ -74,4 +74,11 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', transformations: Object.keys(transformations) });
 });
 
-app.listen(PORT, () => {});
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor de transformaciones ejecutándose en http://localhost:${PORT}`);
+  console.log(`📝 Transformaciones disponibles: ${Object.keys(transformations).join(', ')}`);
+  console.log(`\n💡 Para usar en Whispering:`);
+  console.log(`   - Base URL: http://localhost:${PORT}/v1`);
+  console.log(`   - Model: lowercase (o cualquier otra transformación)`);
+  console.log(`   - API Key: (cualquier valor, no se valida)\n`);
+});
