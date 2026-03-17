@@ -8,7 +8,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Transformaciones disponibles
+// Available transformations
 const transformations = {
   lowercase: (text) => text.toLowerCase(),
   uppercase: (text) => text.toUpperCase(),
@@ -18,34 +18,34 @@ const transformations = {
   'trim': (text) => text.trim(),
   'reverse': (text) => text.split('').reverse().join(''),
 
-  // Eliminar puntuaciones pero mantener espacios entre palabras
+  // Remove punctuation but keep spaces between words
   'remove-punctuation': (text) => {
-    // reemplaza signos innecesarios
+    // Replace unnecessary signs
     return text
       .replace(/[.,;]/g, ' ')
-      // Normaliza múltiples espacios a uno solo
+      // Normalize multiple spaces to one
       .replace(/\s+/g, ' ')
-      // Elimina espacios al inicio y final
+      // Trim leading and trailing spaces
       .trim();
   },
 
   'all-remove-punctuation': (text) => {
-    // Reemplaza todos los signos de puntuación por un espacio
+    // Replace all punctuation marks with a space
     return text
       .replace(/[.,;:!?¡¿"'`()[\]{}<>\/\\|@#$%^&*+=~_-]/g, ' ')
-      // Normaliza múltiples espacios a uno solo
+      // Normalize multiple spaces to one
       .replace(/\s+/g, ' ')
-      // Elimina espacios al inicio y final
+      // Trim leading and trailing spaces
       .trim();
   },
 
-  // Elimina el punto final de la frase
+  // Remove trailing period
   'remove-trailing-period': (text) => text.replace(/\.\s*$/, ''),
 
-  // Convierte la primera letra de la frase a minúscula
+  // Lowercase the first letter
   'decapitalize': (text) => text.charAt(0).toLowerCase() + text.slice(1),
 
-  // Combinación: eliminar punto final + decapitalizar
+  // Combo: remove trailing period + decapitalize
   'final': (text) => {
     return text
       .replace(/\.\s*$/, '')
@@ -53,21 +53,21 @@ const transformations = {
   }
 };
 
-// Endpoint compatible con OpenAI Chat Completions API
+// OpenAI Chat Completions compatible endpoint
 app.post('/v1/chat/completions', (req, res) => {
   try {
     const { messages, model } = req.body;
 
-    // Extraer el último mensaje del usuario
+    // Extract the user's message
     const userMessage = messages.find(msg => msg.role === 'user')?.content || '';
 
-    // El "model" indica qué transformación aplicar
+    // The "model" field indicates which transformation to apply
     const transformation = transformations[model] || transformations.lowercase;
 
-    // Aplicar la transformación
+    // Apply the transformation
     const result = transformation(userMessage);
 
-    // Responder en formato compatible con OpenAI
+    // Respond in OpenAI-compatible format
     res.json({
       id: `txf-${Date.now()}`,
       object: 'chat.completion',
@@ -95,7 +95,7 @@ app.post('/v1/chat/completions', (req, res) => {
   }
 });
 
-// Endpoint para listar modelos disponibles (opcional)
+// List available models
 app.get('/v1/models', (req, res) => {
   res.json({
     object: 'list',
@@ -114,10 +114,10 @@ app.get('/health', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor de transformaciones ejecutándose en http://localhost:${PORT}`);
-  console.log(`📝 Transformaciones disponibles: ${Object.keys(transformations).join(', ')}`);
-  console.log(`\n💡 Para usar en Whispering:`);
-  console.log(`   - Base URL: http://localhost:${PORT}/v1`);
-  console.log(`   - Model: lowercase (o cualquier otra transformación)`);
-  console.log(`   - API Key: (cualquier valor, no se valida)\n`);
+  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Available transformations:\n${Object.keys(transformations).join(', ')}`);
+  console.log(`\nWhispering setup:`);
+  console.log(`  Base URL: http://localhost:${PORT}/v1`);
+  console.log(`  Model: any transformation name`);
+  console.log(`  API Key: any value\n`);
 });
