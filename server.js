@@ -42,14 +42,13 @@ const transformations = {
   // Remove trailing period
   'remove-trailing-period': (text) => text.replace(/\.\s*$/, ''),
 
-  // Lowercase the first letter
-  'decapitalize': (text) => text.charAt(0).toLowerCase() + text.slice(1),
+  // Lowercase first two characters (handles ¿A, ¡A, or just A)
+  'decapitalize': (text) => text[0].toLowerCase() + text[1].toLowerCase() + text.slice(2),
 
   // Combo: remove trailing period + decapitalize
   'final': (text) => {
-    return text
-      .replace(/\.\s*$/, '')
-      .replace(/^./, c => c.toLowerCase());
+    const t = text.replace(/\.\s*$/, '');
+    return t[0].toLowerCase() + t[1].toLowerCase() + t.slice(2);
   }
 };
 
