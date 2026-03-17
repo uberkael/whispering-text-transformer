@@ -12,6 +12,11 @@ app.use(express.json());
 const transformations = {
   lowercase: (text) => text.toLowerCase(),
   uppercase: (text) => text.toUpperCase(),
+  capitalize: (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(),
+  'capitalize-words': (text) => text.replace(/\b\w/g, char => char.toUpperCase()),
+  'remove-spaces': (text) => text.replace(/\s+/g, ''),
+  'trim': (text) => text.trim(),
+  'reverse': (text) => text.split('').reverse().join(''),
 };
 
 // Endpoint compatible con OpenAI Chat Completions API
