@@ -56,4 +56,19 @@ app.post('/v1/chat/completions', (req, res) => {
   }
 });
 
+// Endpoint para listar modelos disponibles (opcional)
+app.get('/v1/models', (req, res) => {
+  res.json({
+    object: 'list',
+    data: Object.keys(transformations).map(name => ({
+      id: name,
+      object: 'model',
+      created: Math.floor(Date.now() / 1000),
+      owned_by: 'whispering-text-transformer'
+    }))
+  });
+});
+
+
+
 app.listen(PORT, () => {});
