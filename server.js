@@ -20,7 +20,17 @@ const transformations = {
 
   // Eliminar puntuaciones pero mantener espacios entre palabras
   'remove-punctuation': (text) => {
-    // Reemplaza signos de puntuación por un espacio
+    // reemplaza signos innecesarios
+    return text
+      .replace(/[.,;]/g, ' ')
+      // Normaliza múltiples espacios a uno solo
+      .replace(/\s+/g, ' ')
+      // Elimina espacios al inicio y final
+      .trim();
+  },
+
+  'all-remove-punctuation': (text) => {
+    // Reemplaza todos los signos de puntuación por un espacio
     return text
       .replace(/[.,;:!?¡¿"'`()[\]{}<>\/\\|@#$%^&*+=~_-]/g, ' ')
       // Normaliza múltiples espacios a uno solo
@@ -33,7 +43,7 @@ const transformations = {
   'final': (text) => {
     // Primero elimina puntuaciones
     const withoutPunctuation = text
-      .replace(/[.,;:!?¡¿"'`()[\]{}<>\/\\|@#$%^&*+=~_-]/g, ' ')
+      .replace(/[.,;]/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
     // Luego convierte a minúsculas
