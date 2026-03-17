@@ -69,6 +69,9 @@ app.get('/v1/models', (req, res) => {
   });
 });
 
-
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', transformations: Object.keys(transformations) });
+});
 
 app.listen(PORT, () => {});
