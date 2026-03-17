@@ -1,54 +1,54 @@
 # Whispering Text Transformer
 
-Servidor local compatible con OpenAI API para transformaciones de texto en Whispering.
+Local server compatible with OpenAI API for text transformations in Whispering.
 
-## Inicio rápido
+## Quick start
 
 ```bash
-# Con node
+# With node
 npm install && npm start
 
-# Con bun
+# With bun
 bun install && bun server.js
-# o con script
+# or with script
 bun run bs
 ```
 
-El servidor se ejecutará en `http://localhost:3000`
+The server will run at `http://localhost:3000`
 
-## Transformaciones disponibles
+## Available transformations
 
-| Transformación | Descripción | Ejemplo |
+| Transformation | Description | Example |
 | --- | --- | --- |
-| `lowercase` | Convierte a minúsculas | `"HOLA MUNDO"` → `"hola mundo"` |
-| `uppercase` | Convierte a mayúsculas | `"hola mundo"` → `"HOLA MUNDO"` |
-| `capitalize` | Primera letra mayúscula, resto minúsculas | `"HOLA MUNDO"` → `"Hola mundo"` |
-| `capitalize-words` | Capitaliza cada palabra | `"hola mundo"` → `"Hola Mundo"` |
-| `remove-spaces` | Elimina todos los espacios | `"hola mundo"` → `"holamundo"` |
-| `trim` | Elimina espacios al inicio y final | `"  hola  "` → `"hola"` |
-| `reverse` | Invierte el texto | `"hola"` → `"aloh"` |
-| `remove-punctuation` | Elimina comas, puntos y punto y coma | `"Hola, mundo."` → `"Hola mundo"` |
-| `all-remove-punctuation` | Elimina todos los signos de puntuación | `"¡Hola, mundo!"` → `"Hola mundo"` |
-| `remove-trailing-period` | Elimina el punto final | `"Hola mundo."` → `"Hola mundo"` |
-| `decapitalize` | Primera letra a minúscula | `"Hola mundo"` → `"hola mundo"` |
-| `final` | Elimina punto final + decapitaliza | `"Hola mundo."` → `"hola mundo"` |
+| `lowercase` | Converts to lowercase | `"HELLO WORLD"` → `"hello world"` |
+| `uppercase` | Converts to uppercase | `"hello world"` → `"HELLO WORLD"` |
+| `capitalize` | First letter uppercase, rest lowercase | `"HELLO WORLD"` → `"Hello world"` |
+| `capitalize-words` | Capitalizes each word | `"hello world"` → `"Hello World"` |
+| `remove-spaces` | Removes all spaces | `"hello world"` → `"helloworld"` |
+| `trim` | Removes leading and trailing spaces | `"  hello  "` → `"hello"` |
+| `reverse` | Reverses the text | `"hello"` → `"olleh"` |
+| `remove-punctuation` | Removes commas, periods and semicolons | `"Hello, world."` → `"Hello world"` |
+| `all-remove-punctuation` | Removes all punctuation marks | `"Hello, world!"` → `"Hello world"` |
+| `remove-trailing-period` | Removes the trailing period | `"Hello world."` → `"Hello world"` |
+| `decapitalize` | Lowercases the first letter | `"Hello world"` → `"hello world"` |
+| `final` | Removes trailing period + decapitalizes | `"Hello world."` → `"hello world"` |
 
-## Configuración en Whispering
+## Whispering setup
 
-1. Crear transformación: **Transformations** > **Create Transformation** > paso **Prompt Transform**
-2. Configurar proveedor:
+1. Create transformation: **Transformations** > **Create Transformation** > **Prompt Transform** step
+2. Configure provider:
    - **Provider**: `Custom`
    - **Base URL**: `http://localhost:3000/v1`
-   - **Model**: nombre de la transformación (ej. `final`)
-   - **API Key**: cualquier valor
+   - **Model**: transformation name (e.g. `final`)
+   - **API Key**: any value
 3. Prompts:
-   - **System Prompt**: vacío
+   - **System Prompt**: empty
    - **User Prompt**: `{{input}}`
 
-## Probar
+## Testing
 
 ```bash
-# Script automático (servidor debe estar corriendo)
+# Automated script (server must be running)
 ./test.sh
 
 # Manual
@@ -56,5 +56,5 @@ curl http://localhost:3000/health
 curl http://localhost:3000/v1/models
 curl -X POST http://localhost:3000/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -d '{"model": "final", "messages": [{"role": "user", "content": "Hola mundo."}]}'
+  -d '{"model": "final", "messages": [{"role": "user", "content": "Hello world."}]}'
 ```
