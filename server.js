@@ -17,6 +17,28 @@ const transformations = {
   'remove-spaces': (text) => text.replace(/\s+/g, ''),
   'trim': (text) => text.trim(),
   'reverse': (text) => text.split('').reverse().join(''),
+
+  // Eliminar puntuaciones pero mantener espacios entre palabras
+  'remove-punctuation': (text) => {
+    // Reemplaza signos de puntuación por un espacio
+    return text
+      .replace(/[.,;:!?¡¿"'`()[\]{}<>\/\\|@#$%^&*+=~_-]/g, ' ')
+      // Normaliza múltiples espacios a uno solo
+      .replace(/\s+/g, ' ')
+      // Elimina espacios al inicio y final
+      .trim();
+  },
+
+  // Combinación: lowercase + eliminar puntuaciones
+  'final': (text) => {
+    // Primero elimina puntuaciones
+    const withoutPunctuation = text
+      .replace(/[.,;:!?¡¿"'`()[\]{}<>\/\\|@#$%^&*+=~_-]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    // Luego convierte a minúsculas
+    return withoutPunctuation.toLowerCase();
+  }
 };
 
 // Endpoint compatible con OpenAI Chat Completions API
