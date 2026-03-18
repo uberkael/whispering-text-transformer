@@ -45,12 +45,16 @@ const transformations = {
   // Lowercase first two characters (handles ¿A, ¡A, or just A)
   'decapitalize': (text) => text[0].toLowerCase() + text[1].toLowerCase() + text.slice(2),
 
-  // Combo: remove trailing period + decapitalize
+  // Replace misrecognized words: Gira→Jira
+  'replace-words': (text) => text.replace(/\bGira\b/g, 'Jira'),
+
+  // Combo: remove trailing period + decapitalize + replace-words
   'final': (text) => {
     const t = text.replace(/\.\s*$/, '');
     // TODO: lowercase after mid-sentence periods: "Algo. Luego" → "algo luego"
     // const t = text.replace(/\.\s*/g, ' ').trim();
-    return t[0].toLowerCase() + t[1].toLowerCase() + t.slice(2);
+    const r = t[0].toLowerCase() + t[1].toLowerCase() + t.slice(2);
+    return r.replace(/\bGira\b/g, 'Jira');
   }
 };
 
