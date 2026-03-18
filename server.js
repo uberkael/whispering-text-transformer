@@ -48,13 +48,12 @@ const transformations = {
   // Replace misrecognized words: Gira→Jira
   'replace-words': (text) => text.replace(/\bGira\b/g, 'Jira'),
 
-  // Combo: remove trailing period + decapitalize + replace-words
+  // Combo: remove-trailing-period + decapitalize + replace-words
   'final': (text) => {
-    const t = text.replace(/\.\s*$/, '');
+    let r = transformations['remove-trailing-period'](text);
     // TODO: lowercase after mid-sentence periods: "Algo. Luego" → "algo luego"
-    // const t = text.replace(/\.\s*/g, ' ').trim();
-    const r = t[0].toLowerCase() + t[1].toLowerCase() + t.slice(2);
-    return r.replace(/\bGira\b/g, 'Jira');
+    r = transformations['decapitalize'](r);
+    return transformations['replace-words'](r);
   }
 };
 
