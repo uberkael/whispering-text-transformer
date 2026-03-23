@@ -5,16 +5,28 @@ Local server compatible with OpenAI API for text transformations in Whispering.
 ## Quick start
 
 ```bash
-# With node
+# Node
 npm install && npm start
 
-# With bun
+# Bun
 bun install && bun server.js
 # or with script
 bun run bs
 ```
 
-The server will run at `http://localhost:3000`
+The server will run at `http://localhost:3000` by default.
+
+### Custom port
+
+You can configure the port using the `PORT` environment variable:
+
+```bash
+# Node
+PORT=8080 npm start
+
+# Bun
+PORT=8080 bun server.js
+```
 
 ## Available transformations
 
@@ -48,9 +60,6 @@ The server will run at `http://localhost:3000`
 ## Testing
 
 ```bash
-# Automated script (server must be running)
-./test.sh
-
 # Manual
 curl http://localhost:3000/health
 curl http://localhost:3000/v1/models

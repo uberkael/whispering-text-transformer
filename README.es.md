@@ -14,7 +14,19 @@ bun install && bun server.js
 bun run bs
 ```
 
-El servidor se ejecutará en `http://localhost:3000`
+El servidor se ejecutará en `http://localhost:3000` por defecto.
+
+### Puerto personalizado
+
+Puedes configurar el puerto usando la variable de entorno `PORT`:
+
+```bash
+# Con node
+PORT=8080 npm start
+
+# Con bun
+PORT=8080 bun server.js
+```
 
 ## Transformaciones disponibles
 
