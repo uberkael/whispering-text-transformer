@@ -1,7 +1,7 @@
 {
   "name": "whispering-text-transformer",
   "version": "1.0.0",
-  "description": "Servidor local de transformaciones de texto compatible con Whispering",
+  "description": "Local text transformation server compatible with Whispering",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
