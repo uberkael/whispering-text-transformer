@@ -45,8 +45,11 @@ const transformations = {
   // Lowercase first two characters (handles ¿A, ¡A, or just A)
   'decapitalize': (text) => text[0].toLowerCase() + text[1].toLowerCase() + text.slice(2),
 
-  // Replace misrecognized words: Gira→Jira
-  'replace-words': (text) => text.replace(/\bGira\b/g, 'Jira'),
+  // Replace misrecognized words: Gira→Jira, cómic/comic→commit
+  'replace-words': (text) => text
+      .replace(/\bgira\b/gi, 'Jira')
+      .replace(/\bc[óo]mic(s?)\b/gi, 'commit$1')
+  ,
 
   // Combo: remove-trailing-period + decapitalize + replace-words
   'final': (text) => {
