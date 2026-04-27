@@ -16,6 +16,7 @@ const transformations = {
   'capitalize-words': (text) => text.replace(/\b\w/g, char => char.toUpperCase()),
   'remove-spaces': (text) => text.replace(/\s+/g, ''),
   'trim': (text) => text.trim(),
+  'trim-trailing-newlines': (text) => text.replace(/[\r\n]+$/, ''),
   'reverse': (text) => text.split('').reverse().join(''),
 
   // Remove punctuation but keep spaces between words
@@ -45,15 +46,17 @@ const transformations = {
   // Lowercase first two characters (handles ¿A, ¡A, or just A)
   'decapitalize': (text) => text[0].toLowerCase() + text[1].toLowerCase() + text.slice(2),
 
-  // Replace misrecognized words: Gira→Jira, cómic/comic→commit
+  // Replace misrecognized words: Gira→Jira, cómic/comic→commit, landa→lambda
   'replace-words': (text) => text
       .replace(/\bgira\b/gi, 'Jira')
       .replace(/\bc[óo]mic(s?)\b/gi, 'commit$1')
+      .replace(/\blanda(s?)\b/gi, 'lambda$1')
   ,
 
-  // Combo: remove-trailing-period + decapitalize + replace-words
+  // Combo: trim trailing newlines + remove-trailing-period + decapitalize + replace-words
   'final': (text) => {
-    let r = transformations['remove-trailing-period'](text);
+    let r = transformations['trim-trailing-newlines'](text);
+    r = transformations['remove-trailing-period'](r);
     // TODO: lowercase after mid-sentence periods: "Algo. Luego" → "algo luego"
     r = transformations['decapitalize'](r);
     return transformations['replace-words'](r);

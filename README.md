@@ -38,12 +38,13 @@ PORT=8080 bun server.js
 | `capitalize-words` | Capitalizes each word | `"hello world"` → `"Hello World"` |
 | `remove-spaces` | Removes all spaces | `"hello world"` → `"helloworld"` |
 | `trim` | Removes leading and trailing spaces | `"  hello  "` → `"hello"` |
+| `trim-trailing-newlines` | Removes only trailing line breaks | `"hello\n\n"` → `"hello"` |
 | `reverse` | Reverses the text | `"hello"` → `"olleh"` |
 | `remove-punctuation` | Removes commas, periods and semicolons | `"Hello, world."` → `"Hello world"` |
 | `all-remove-punctuation` | Removes all punctuation marks | `"Hello, world!"` → `"Hello world"` |
 | `remove-trailing-period` | Removes the trailing period | `"Hello world."` → `"Hello world"` |
 | `decapitalize` | Lowercases the first letter | `"Hello world"` → `"hello world"` |
-| `final` | Removes trailing period + decapitalizes | `"Hello world."` → `"hello world"` |
+| `final` | Removes trailing line breaks and period + decapitalizes | `"Hello world.\n"` → `"hello world"` |
 
 ## Whispering setup
 

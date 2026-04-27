@@ -38,12 +38,13 @@ PORT=8080 bun server.js
 | `capitalize-words` | Capitaliza cada palabra | `"hola mundo"` → `"Hola Mundo"` |
 | `remove-spaces` | Elimina todos los espacios | `"hola mundo"` → `"holamundo"` |
 | `trim` | Elimina espacios al inicio y final | `"  hola  "` → `"hola"` |
+| `trim-trailing-newlines` | Elimina solo los saltos de línea del final | `"hola\n\n"` → `"hola"` |
 | `reverse` | Invierte el texto | `"hola"` → `"aloh"` |
 | `remove-punctuation` | Elimina comas, puntos y punto y coma | `"Hola, mundo."` → `"Hola mundo"` |
 | `all-remove-punctuation` | Elimina todos los signos de puntuación | `"¡Hola, mundo!"` → `"Hola mundo"` |
 | `remove-trailing-period` | Elimina el punto final | `"Hola mundo."` → `"Hola mundo"` |
 | `decapitalize` | Primera letra a minúscula | `"Hola mundo"` → `"hola mundo"` |
-| `final` | Elimina punto final + decapitaliza | `"Hola mundo."` → `"hola mundo"` |
+| `final` | Elimina saltos de línea y punto final + decapitaliza | `"Hola mundo.\n"` → `"hola mundo"` |
 
 ## Configuración en Whispering
 
