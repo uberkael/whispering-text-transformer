@@ -1,6 +1,8 @@
 # Whispering Text Transformer
 
-Local server compatible with OpenAI API for text transformations in Whispering.
+[![Whispering](https://img.shields.io/badge/Built%20for-Whispering-7c3aed?logo=github&labelColor=1a1a2e)](https://github.com/EpicenterHQ/epicenter/tree/main/apps/whispering) [![OpenAI Compatible](https://img.shields.io/badge/API-OpenAI%20Compatible-10a37f?logo=openai&labelColor=1a1a2e)](https://platform.openai.com/docs/api-reference/chat)
+
+Local server compatible with OpenAI API for text transformations in [Whispering](https://github.com/EpicenterHQ/epicenter/tree/main/apps/whispering).
 
 ## Quick start
 
@@ -48,6 +50,8 @@ PORT=8080 bun server.js
 
 ## Whispering setup
 
+> **Don't have [Whispering](https://github.com/EpicenterHQ/epicenter/tree/main/apps/whispering) yet?** Check the repo for installation instructions.
+
 1. Create transformation: **Transformations** > **Create Transformation** > **Prompt Transform** step
 2. Configure provider:
    - **Provider**: `Custom`
@@ -68,3 +72,7 @@ curl -X POST http://localhost:3000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{"model": "final", "messages": [{"role": "user", "content": "Hello world."}]}'
 ```
+
+---
+
+Part of the [Whispering](https://github.com/EpicenterHQ/epicenter/tree/main/apps/whispering) ecosystem.
