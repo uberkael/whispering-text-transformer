@@ -123,10 +123,33 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', transformations: Object.keys(transformations) });
 });
 
+const { execSync } = require('child_process');
+
+function checkPort(port) {
+  try {
+    const result = execSync(`ss -tlnp sport = :${port} 2>/dev/null`, { encoding: 'utf8' });
+    if (!result.trim()) return null;
+    const procs = [];
+    for (const m of result.matchAll(/"([^"]+)",pid=(\d+)/g)) {
+      procs.push({ name: m[1], pid: m[2] });
+    }
+    return procs.length ? procs : null;
+  } catch { return null; }
+}
+
+const portInfo = checkPort(PORT);
+if (portInfo) {
+  console.error(`Error: port ${PORT} is already in use:`);
+  for (const p of portInfo) console.error(`${p.name} - PID ${p.pid}`);
+  console.error("\nTo use another port:");
+  console.error("PORT=<other> bun bs\n");
+  process.exit(1);
+}
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
   console.log(`Available transformations:\n${Object.keys(transformations).join(', ')}`);
-  console.log(`\nWhispering setup:`);
+  console.log("\nWhispering setup:");
   console.log(`  Base URL: http://localhost:${PORT}/v1`);
   console.log(`  Model: any transformation name`);
   console.log(`  API Key: any value\n`);
